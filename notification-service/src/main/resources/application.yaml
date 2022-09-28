@@ -1,0 +1,74 @@
+server:
+  port: 8085
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: notification-service
+  mail:
+    default-encoding: UTF-8
+    host: email-smtp.ap-south-1.amazonaws.com
+    username: AKIA6NDTRQRBCYYSF3RM
+    password: BPMWmDK9Op54mGa3prYKBISmKNmt8/9DWjXM0VHxeqtP
+
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+    from: info.actorpay@gmail.com
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#  datasource:
+#    url: jdbc:mariadb://rds-mumsdbserv01.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actorApp
+#    username: admin
+#    password: MariaDBPassword
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Live Server
+#  datasource:
+#    url: jdbc:mariadb://actor-pay.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actorApp
+#    username: actorpay
+#    password: Actorpay#!15
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/actorApp
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+
+
+defaultZone:  http://localhost:8761
+registerWithEureka: true
+
+#swagger-ui Settings
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operationsSorter: alpha
+    enabled: true
+  pathsToMatch: /notification/**
+  packagesToScan: com.octal.actorPay.controller
+  show-actuator: true
+
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+external.sms.service.url: https://platform.clickatell.com/messages

@@ -1,0 +1,64 @@
+server:
+  port: 8096
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: payment-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#Live Server
+#  datasource:
+#    url: jdbc:mariadb://actor-pay.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/payment_serviceDB
+#    username: actorpay
+#    password: Actorpay#!15
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/payment_serviceDB
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+
+defaultZone:  http://localhost:8761
+registerWithEureka: true
+
+#swagger-ui Settings
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operationsSorter: alpha
+    enabled: true
+  pathsToMatch: /**
+  packagesToScan: com.octal.actorPay.controller
+  show-actuator: true
+  
+ 
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+external.sms.service.url: https://platform.clickatell.com/messages
+
+pg:
+  razor:
+    key: rzp_test_oSZiPO9vqBpHhY
+    secret: DMZc5o4ilpifFnMOok0HYsut
+    base-endpoint: https://api.razorpay.com
+    api-deactivate: /v1/fund_accounts/{id}
+    api-contact: /v1/contacts
+    api-payout: /v1/payouts
+    queue-if-low-balance : false
+    pay-out-account-no: 2323230081309053

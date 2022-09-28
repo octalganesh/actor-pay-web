@@ -1,0 +1,112 @@
+server:
+  port: 8084
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: development
+#  cloud:
+#    config:
+#      uri:  http://localhost:8888
+#      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#  datasource:
+#    url: jdbc:mariadb://rds-mumsdbserv01.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actor_pay_user_service_db
+#    username: admin
+#    password: MariaDBPassword
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Live Server
+#  datasource:
+#    url: jdbc:mariadb://actorpay2.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actor_pay_user_service_db
+#    username: actorpay
+#    password: Actorpay#!15
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/actor_pay_user_service_db
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+#JWT token properties, token validity in seconds
+jwt:
+    access:
+        token:
+            validity: 60000
+    refresh:
+        token:
+            validity: 20000
+    secret: actorPay
+
+defaultZone:  http://localhost:8761
+registerWithEureka: true
+
+#swagger-ui Settings
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operationsSorter: alpha
+    enabled: true
+  pathsToMatch: /users/**
+  packagesToScan: com.octal.actorPay.controller
+  show-actuator: true
+
+forgot.password.time.in.second: 60
+forgot.password.otp.resend.count: 3
+phone.verification.otp.resend.count: 3
+phone.verification.resent.time.in.second: 60
+
+user.activation.link.resend.count: 3
+user.activation.link.resend.time.in.second: 3600
+#86400 = 1 day, value is in second
+user.activation.link.expiration.time.in.second: 86400
+
+user:
+  invitation:
+    link:
+      url: http://192.168.1.114:3000/invitation-link/<invitation-code>
+
+user.activation.link.url: http://192.168.1.114:3000/user-verify/<token>
+spring.data.web.pageable.one-indexed-parameters:  true
+user.forget.password.link:  http://192.168.1.114:3000/reset-password/<token>
+
+payment.service.domain: http://localhost:8096
+payment.service.create.wallet.url:  ${payment.service.domain}/v1/wallet/create
+
+## value in hours
+user.phone.verification.otp.expire: 1
+
+## user max invalid credential attempts
+user.max.invalid.password.count:  5
+
+
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+external.sms.service.url: https://platform.clickatell.com/messages
+
+product:
+  commission: 10
+admin:
+  dispute:
+    email: ssuresh.saikishore@gmail.com
+kyc:
+  base-endpoint: https://ext.digio.in:444
+  client-id: AIQHDZUO4WPRUYOX9KW4BLJXHMOYH24Z
+  client-secret: CEFBSS1C98K76BLAS4NT9G6C6Y5FH4KD
+  verification-endpoint: /v3/client/kyc/analyze/file/idcard

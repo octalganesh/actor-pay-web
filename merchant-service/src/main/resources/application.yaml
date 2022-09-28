@@ -1,0 +1,93 @@
+server:
+  port: 8086
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: merchant-service
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: none
+
+  #  datasource:
+  #    url: jdbc:mariadb://rds-mumsdbserv01.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actorApp
+  #    username: admin
+  #    password: MariaDBPassword
+  #    driver-class-name: org.mariadb.jdbc.Driver
+
+#Live Server
+#  datasource:
+#    url: jdbc:mariadb://actorpay2.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/merchant_db
+#    username: actorpay
+#    password: Actorpay#!15
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/merchant_db
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+defaultZone: http://localhost:8761
+registerWithEureka: true
+
+#Swagger-ui Settings
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operationsSorter: alpha
+    enabled: true
+  pathsToMatch: /**
+  packagesToScan: com.octal.actorPay.controller
+  show-actuator: true
+
+
+
+#JWT token properties, token validity in seconds
+jwt:
+  access:
+    token:
+      validity: 60000
+  refresh:
+    token:
+      validity: 20000
+  secret: actorPay
+
+forgot.password.time.in.second: 60
+forgot.password.otp.resend.count: 3
+user.activation.link.url: http://192.168.1.114:3006/merchant-verify/<token>
+user.forget.password.link: http://192.168.1.114:3006/reset-password/<token>
+
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+external.sms.service.url: https://platform.clickatell.com/messages
+
+phone.verification.otp.resend.count: 3
+phone.verification.resent.time.in.second: 60
+
+user.activation.link.resend.count: 3
+user.activation.link.resend.time.in.second: 3600
+#86400 = 1 day, value is in second
+user.activation.link.expiration.time.in.second: 86400
+
+## value in hours
+user.phone.verification.otp.expire: 1
+
+## user max invalid credential attempts
+user.max.invalid.password.count: 5
+
+kyc:
+  base-endpoint: https://ext.digio.in:444
+  client-id: AIQHDZUO4WPRUYOX9KW4BLJXHMOYH24Z
+  client-secret: CEFBSS1C98K76BLAS4NT9G6C6Y5FH4KD
+  verification-endpoint: /v3/client/kyc/analyze/file/idcard

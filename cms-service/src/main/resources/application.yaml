@@ -1,0 +1,64 @@
+server:
+  port: 8088
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: cms-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#Live Server
+#  datasource:
+#    url: jdbc:mariadb://actor-pay.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/cms_service_db
+#    username: actorpay
+#    password: Actorpay#!15
+#    driver-class-name: org.mariadb.jdbc.Driver
+
+#Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/cms_service_db
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+#    initialize: true
+#    initialization-mode: always
+#The above two line is for future implementation of data.sql file but intellij do not support .sql so check it
+
+#JWT token properties, token validity in seconds
+jwt:
+  access:
+    token:
+      validity: 60000
+  refresh:
+    token:
+      validity: 20000
+  secret: actorPay
+
+defaultZone:  http://localhost:8761
+registerWithEureka: true
+
+#swagger-ui Settings
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operationsSorter: alpha
+    enabled: true
+  pathsToMatch: /**
+  packagesToScan: com.octal.actorPay.controller
+  show-actuator: true
+
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+external.sms.service.url: https://platform.clickatell.com/messages

@@ -1,0 +1,19 @@
+CREATE TABLE `product_commission` (
+  `id` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `is_active` bit(1) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `actor_commission_amt` double(10,2) NOT NULL,
+  `commission_percentage` double(10,2) NOT NULL,
+  `merchant_earrings` double(10,2) NOT NULL,
+  `merchant_id` varchar(255) NOT NULL,
+  `order_no` varchar(255) NOT NULL,
+  `order_status` varchar(255) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `settlement_status` varchar(255) NOT NULL,
+  `order_item_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK911m5c4vc4tdc4pm97pufq6jk` (`order_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

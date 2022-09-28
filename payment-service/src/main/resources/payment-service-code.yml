@@ -1,0 +1,5 @@
+systemCode:
+  walletCode: WTXN
+  parentWalletCode: WPTXN
+  requestMoneyCode: REQM
+

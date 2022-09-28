@@ -1,0 +1,169 @@
+server:
+  port: 8765
+  error:
+    include-stacktrace: never
+
+spring:
+  application:
+    name: actor-api-gateway
+  #  cloud:
+  #    config:
+  #      discovery:
+  #        service-id: config-server
+  #        enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+    #  datasource:
+    #    url: jdbc:mariadb://rds-mumsdbserv01.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actorApp
+    #    username: admin
+    #    password: MariaDBPassword
+    #    driver-class-name: org.mariadb.jdbc.Driver
+
+    #Live Server
+    #  datasource:
+    #    url: jdbc:mariadb://actor-pay.c3j6kksosxgk.ap-south-1.rds.amazonaws.com:3306/actorApp
+    #    username: actorpay
+    #    password: Actorpay#!15
+    #    driver-class-name: org.mariadb.jdbc.Driver
+
+    #Local Server
+  datasource:
+    url: jdbc:mariadb://localhost:3307/actorApp
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  ignored-services: "*"
+  host:
+    time-to-live: 12111111111
+    connect-timeout-millis: 50000000
+    max-per-route-connections: 10000000
+    max-total-connections: 50000000
+    socket-timeout-millis: 60000000
+  routes:
+    admin-service:
+      path: /api/admin-service/**
+      service-id: admin-service
+      stripPrefix: true
+    customer-service:
+      path: api/customer-service/**
+      service-id: customer-service
+      stripPrefix: true
+    product-service:
+      path: api/product-service/**
+      service-id: product-service
+      stripPrefix: true
+    merchant-service:
+      path: /api/merchant-service/**
+      service-id: merchant-service
+      stripPrefix: true
+    nfc-service:
+      path: api/nfc-service/**
+      service-id: nfc-service
+      stripPrefix: true
+    qr-service:
+      path: api/qr-service/**
+      service-id: qr-service
+      stripPrefix: true
+    bank-service:
+      path: api/bank-service/**
+      service-id: bank-service
+      stripPrefix: true
+    bill-service:
+      path: api/bill-service/**
+      service-id: bill-service
+      stripPrefix: true
+    recharge-service:
+      path: api/recharge-service/**
+      service-id: recharge-service
+      stripPrefix: true
+    transfer-money-service:
+      path: api/transfer-money-service/**
+      service-id: transfer-money-service
+      stripPrefix: true
+    add-money-service:
+      path: api/add-money-service/**
+      service-id: add-money-service
+      stripPrefix: true
+    account-setting-service:
+      path: api/account-setting-service/**
+      service-id: account-setting-service
+      stripPrefix: true
+    user-service:
+      path: /api/user-service/**
+      service-id: user-service
+      stripPrefix: true
+    notification-service:
+      path: /api/notification-service/**
+      service-id: notification-service
+      stripPrefix: true
+    cms-service:
+      path: /api/cms-service/**
+      service-id: cms-service
+      stripPrefix: true
+    global-service:
+      path: /api/global-service/**
+      service-id: global-service
+      stripPrefix: true
+    payment-service:
+      path: /api/payement-service/**
+      service-id: payment-service
+      stripPrefix: true
+    chat-service:
+      path: /api/chat-service/**
+      service-id: chat-service
+      stripPrefix: true
+
+ribbon:
+  eager-load:
+    enabled: true
+  eureka:
+    enabled: true  #important
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000000
+
+#JWT token properties, token validity in seconds
+jwt:
+  access:
+    token:
+      validity: 10000
+  refresh:
+    token:
+      validity: 20000
+  secret: actorPay
+  token-type: Bearer
+S3Upload:
+  access-key: AKIA6NDTRQRBFMUF77JO
+  secret-key: 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
+S3base:
+  url: https://s3-sbucket1.s3.ap-south-1.amazonaws.com/
+
+external.sms.service.url: https://platform.clickatell.com/messages

@@ -1,0 +1,11 @@
+global-settings:
+  cancellation-charge: 5
+
+  return-charge: 3
+
+  admin-commission: 7
+
+  refund-charge: 2
+
+  transaction-fee: 3
+

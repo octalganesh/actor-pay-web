@@ -1,0 +1,6 @@
+SET CONSTRAINT_CHECKS=0;
+delete from order_details;
+delete from order_item;
+delete from cancel_order;
+delete from cancel_order_item;
+delete from actor_pay_admin_db.product_commission;
